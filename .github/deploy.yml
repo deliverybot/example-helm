@@ -3,6 +3,7 @@ canary:
   - environment: production
     description: 'Canary'
     payload:
+      value_files: ["./config/production.yml"]
       release: production-myapp
       namespace: production
       track: canary
@@ -15,14 +16,30 @@ production:
     task: remove
     description: 'Remove canary'
     payload:
+      value_files: ["./config/production.yml"]
       track: canary
       release: production-myapp
       namespace: production
   - environment: production
     description: 'Production'
     payload:
+      value_files: ["./config/production.yml"]
       release: production-myapp
       namespace: production
       track: stable
       values:
         replicaCount: 5
+
+staging:
+  auto_deploy_on: refs/heads/master
+  deployments:
+  - environment: staging
+    description: 'Staging'
+    payload:
+      value_files: ["./config/staging.yml"]
+      release: staging-myapp
+      namespace: staging
+      track: stable
+      values:
+        replicaCount: 1
+
