@@ -1,3 +1,5 @@
+# Canary release using track=canary. Release a few pods that will be served by
+# the stable chart service.
 canary:
   deployments:
   - environment: production
@@ -9,27 +11,31 @@ canary:
       track: canary
       values:
         replicaCount: 1
+        # image:
+        #   repository: my-repo
+        #   tag: ${{ github.sha }}
 
+# Deployment to a production environment is kicked off manually. This actually
+# runs two deployment, one is to remove the canary pods if it exists and the
+# other deploys to production.
 production:
   deployments:
-  - environment: production
-    task: remove
-    description: 'Remove canary'
-    payload:
-      value_files: ["./config/production.yml"]
-      track: canary
-      release: production-myapp
-      namespace: production
   - environment: production
     description: 'Production'
     payload:
       value_files: ["./config/production.yml"]
+      # Remove the canary deployment if it exists when doing a full prod deploy.
+      remove_canary: true
       release: production-myapp
       namespace: production
       track: stable
       values:
         replicaCount: 5
+        # image:
+        #   repository: my-repo
+        #   tag: ${{ github.sha }}
 
+# Automatic deployment to a staging environment on every push to master.
 staging:
   auto_deploy_on: refs/heads/master
   deployments:
@@ -42,4 +48,23 @@ staging:
       track: stable
       values:
         replicaCount: 1
+        # image:
+        #   repository: my-repo
+        #   tag: ${{ github.sha }}
 
+# Review environments can be triggered with /deploy review inside a pull
+# request.
+review:
+  deployments:
+  - environment: pr{{ pr }}
+    description: 'Review'
+    payload:
+      value_files: ["./config/review.yml"]
+      release: review-myapp-{{ pr }}
+      namespace: staging
+      track: stable
+      values:
+        replicaCount: 1
+        # image:
+        #   repository: my-repo
+        #   tag: ${{ github.sha }}

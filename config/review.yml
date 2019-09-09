@@ -1,6 +1,6 @@
 env:
 - name: ENVIRONMENT
-  value: production
+  value: review
 
 secrets:
 - name: API_KEY
