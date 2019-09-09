@@ -8,4 +8,4 @@
 
 4. Push a commit to your new fork and watch the example workflows kick off!
 
-5. Visit the [deliverybot app](https://deliverybot.web.app) and manually deploy.
+5. Visit the [deliverybot app](https://app.deliverybot.dev) and manually deploy.
