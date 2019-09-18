@@ -1,7 +1,7 @@
 # Deliverybot Helm Example
 
 This is an example of deploying to Helm using GitHub actions.
-[View the guide.](https://deliverybot.dev/docs/guides/kubernetes)
+[View the guide.](https://deliverybot.dev/docs/delivering/helm-action/)
 
 1. Click the "Use this template" button to create a new fork of this repository.
 
