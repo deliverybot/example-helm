@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: 'actions/checkout@v1'
     - name: 'Docker login'
-      run: 'docker login docker.pkg.github.com --username colinjfw --password ${{ github.token }}'
+      run: 'docker login docker.pkg.github.com --username colinjfw --password ${{ secrets.PACKAGES_TOKEN }}'
     - name: 'Docker build'
       run: 'docker build -t docker.pkg.github.com/colinjfw/example-helm:${{ github.sha }} .'
     - name: 'Docker push'
