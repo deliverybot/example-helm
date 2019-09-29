@@ -15,6 +15,7 @@ jobs:
       with:
         token: '${{ github.token }}'
         secrets: '${{ toJSON(secrets) }}'
+        version: '${{ github.sha }}'
         chart: 'app'
       env:
         KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
