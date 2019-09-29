@@ -5,7 +5,7 @@ canary:
   - environment: production
     description: 'Canary'
     payload:
-      value_files: ["./config/production.yml"]
+      value_files: ["./config/production.yml", "./config/_common.yml"]
       release: production-myapp
       namespace: production
       track: canary
@@ -23,7 +23,7 @@ production:
   - environment: production
     description: 'Production'
     payload:
-      value_files: ["./config/production.yml"]
+      value_files: ["./config/production.yml", "./config/_common.yml"]
       # Remove the canary deployment if it exists when doing a full prod deploy.
       remove_canary: true
       release: production-myapp
@@ -42,7 +42,7 @@ staging:
   - environment: staging
     description: 'Staging'
     payload:
-      value_files: ["./config/staging.yml"]
+      value_files: ["./config/staging.yml", "./config/_common.yml"]
       release: staging-myapp
       namespace: staging
       track: stable
@@ -59,7 +59,7 @@ review:
   - environment: pr${{ pr }}
     description: 'Review'
     payload:
-      value_files: ["./config/review.yml"]
+      value_files: ["./config/review.yml", "./config/_common.yml"]
       release: review-myapp-${{ pr }}
       namespace: staging
       track: stable
