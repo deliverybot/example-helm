@@ -12,7 +12,7 @@ canary:
       values:
         replicaCount: 1
         image:
-          repository: docker.pkg.github.com/colinjfw/example-helm
+          repository: docker.pkg.github.com/deliverybot/example-helm/app
           tag: ${{ commit.sha }}
 
 # Deployment to a production environment is kicked off manually. This actually
@@ -32,7 +32,7 @@ production:
       values:
         replicaCount: 5
         image:
-          repository: docker.pkg.github.com/colinjfw/example-helm
+          repository: docker.pkg.github.com/deliverybot/example-helm/app
           tag: ${{ commit.sha }}
 
 # Automatic deployment to a staging environment on every push to master.
@@ -49,7 +49,7 @@ staging:
       values:
         replicaCount: 1
         image:
-          repository: docker.pkg.github.com/colinjfw/example-helm
+          repository: docker.pkg.github.com/deliverybot/example-helm/app
           tag: ${{ commit.sha }}
 
 # Review environments can be triggered with /deploy review inside a pull
@@ -66,5 +66,5 @@ review:
       values:
         replicaCount: 1
         image:
-          repository: docker.pkg.github.com/colinjfw/example-helm
+          repository: docker.pkg.github.com/deliverybot/example-helm/app
           tag: ${{ commit.sha }}
