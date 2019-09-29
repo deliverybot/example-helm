@@ -2,6 +2,7 @@
 # the stable chart service.
 canary:
   production_environment: true
+  required_contexts: ["build"]
   deployments:
   - environment: production
     description: 'Canary'
@@ -21,6 +22,7 @@ canary:
 # other deploys to production.
 production:
   production_environment: true
+  required_contexts: ["build"]
   deployments:
   - environment: production
     description: 'Production'
@@ -40,6 +42,7 @@ production:
 # Automatic deployment to a staging environment on every push to master.
 staging:
   auto_deploy_on: refs/heads/master
+  required_contexts: ["build"]
   deployments:
   - environment: staging
     description: 'Staging'
@@ -61,6 +64,7 @@ review:
   # this environment should be destroyed when the PR is closed.
   transient_environment: true
   production_environment: false
+  required_contexts: ["build"]
 
   deployments:
   - environment: pr${{ pr }}
