@@ -1,6 +1,7 @@
 # Canary release using track=canary. Release a few pods that will be served by
 # the stable chart service.
 canary:
+  production_environment: true
   deployments:
   - environment: production
     description: 'Canary'
@@ -19,6 +20,7 @@ canary:
 # runs two deployment, one is to remove the canary pods if it exists and the
 # other deploys to production.
 production:
+  production_environment: true
   deployments:
   - environment: production
     description: 'Production'
@@ -55,6 +57,11 @@ staging:
 # Review environments can be triggered with /deploy review inside a pull
 # request.
 review:
+  # Set the transient environment flag to let GitHub and deliverybot know that
+  # this environment should be destroyed when the PR is closed.
+  transient_environment: true
+  production_environment: false
+
   deployments:
   - environment: pr${{ pr }}
     description: 'Review'
