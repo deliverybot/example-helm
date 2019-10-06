@@ -3,19 +3,18 @@
 canary:
   production_environment: true
   required_contexts: ["build"]
-  deployments:
-  - environment: production
-    description: 'Canary'
-    payload:
-      value_files: ["./config/production.yml", "./config/_common.yml"]
-      release: production-myapp
-      namespace: production
-      track: canary
-      values:
-        replicaCount: 1
-        image:
-          repository: docker.pkg.github.com/deliverybot/example-helm/app
-          tag: ${{ commit.sha }}
+  environment: production
+  description: 'Canary'
+  payload:
+    value_files: ["./config/production.yml", "./config/_common.yml"]
+    release: production-myapp
+    namespace: production
+    track: canary
+    values:
+      replicaCount: 1
+      image:
+        repository: docker.pkg.github.com/deliverybot/example-helm/app
+        tag: ${{ commit.sha }}
 
 # Deployment to a production environment is kicked off manually. This actually
 # runs two deployment, one is to remove the canary pods if it exists and the
@@ -23,39 +22,37 @@ canary:
 production:
   production_environment: true
   required_contexts: ["build"]
-  deployments:
-  - environment: production
-    description: 'Production'
-    payload:
-      value_files: ["./config/production.yml", "./config/_common.yml"]
-      # Remove the canary deployment if it exists when doing a full prod deploy.
-      remove_canary: true
-      release: production-myapp
-      namespace: production
-      track: stable
-      values:
-        replicaCount: 5
-        image:
-          repository: docker.pkg.github.com/deliverybot/example-helm/app
-          tag: ${{ commit.sha }}
+  environment: production
+  description: 'Production'
+  payload:
+    value_files: ["./config/production.yml", "./config/_common.yml"]
+    # Remove the canary deployment if it exists when doing a full prod deploy.
+    remove_canary: true
+    release: production-myapp
+    namespace: production
+    track: stable
+    values:
+      replicaCount: 5
+      image:
+        repository: docker.pkg.github.com/deliverybot/example-helm/app
+        tag: ${{ commit.sha }}
 
 # Automatic deployment to a staging environment on every push to master.
 staging:
   auto_deploy_on: refs/heads/master
   required_contexts: ["build"]
-  deployments:
-  - environment: staging
-    description: 'Staging'
-    payload:
-      value_files: ["./config/staging.yml", "./config/_common.yml"]
-      release: staging-myapp
-      namespace: staging
-      track: stable
-      values:
-        replicaCount: 1
-        image:
-          repository: docker.pkg.github.com/deliverybot/example-helm/app
-          tag: ${{ commit.sha }}
+  environment: staging
+  description: 'Staging'
+  payload:
+    value_files: ["./config/staging.yml", "./config/_common.yml"]
+    release: staging-myapp
+    namespace: staging
+    track: stable
+    values:
+      replicaCount: 1
+      image:
+        repository: docker.pkg.github.com/deliverybot/example-helm/app
+        tag: ${{ commit.sha }}
 
 # Review environments can be triggered with /deploy review inside a pull
 # request.
@@ -66,16 +63,15 @@ review:
   production_environment: false
   required_contexts: ["build"]
 
-  deployments:
-  - environment: pr${{ pr }}
-    description: 'Review'
-    payload:
-      value_files: ["./config/review.yml", "./config/_common.yml"]
-      release: review-myapp-${{ pr }}
-      namespace: staging
-      track: stable
-      values:
-        replicaCount: 1
-        image:
-          repository: docker.pkg.github.com/deliverybot/example-helm/app
-          tag: ${{ commit.sha }}
+  environment: pr${{ pr }}
+  description: 'Review'
+  payload:
+    value_files: ["./config/review.yml", "./config/_common.yml"]
+    release: review-myapp-${{ pr }}
+    namespace: staging
+    track: stable
+    values:
+      replicaCount: 1
+      image:
+        repository: docker.pkg.github.com/deliverybot/example-helm/app
+        tag: ${{ commit.sha }}
