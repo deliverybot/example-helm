@@ -7,15 +7,16 @@ jobs:
   deployment:
     runs-on: 'ubuntu-latest'
     steps:
-    - uses: actions/checkout@v1
-
     - name: 'Deploy'
       uses: 'deliverybot/helm@v1'
       with:
-        release: 'review-myapp-pr${{ github.event.pull_request.number }}'
+        # Task remove means to remove the helm release.
+        task: 'remove'
+        release: 'review-myapp-${{ github.event.pull_request.number }}'
+        version: '${{ github.sha }}'
         track: 'stable'
-        namespace: 'example-helm'
         chart: 'app'
+        namespace: 'example-helm'
         token: '${{ github.token }}'
       env:
         KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
