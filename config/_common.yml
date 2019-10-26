@@ -2,5 +2,6 @@ secrets:
 - name: API_KEY
   value: '${{ secrets.API_KEY }}'
 
-imagePullSecrets:
-- name: regcred
+# Example image pull secrets:
+# imagePullSecrets:
+# - name: regcred
