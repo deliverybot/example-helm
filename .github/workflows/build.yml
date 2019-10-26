@@ -1,0 +1,12 @@
+name: 'Push'
+on: ['push']
+
+jobs:
+  build:
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: 'actions/checkout@v1'
+
+    - name: 'Build'
+      run: 'echo "your tests here"'
