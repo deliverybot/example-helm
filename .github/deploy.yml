@@ -8,7 +8,7 @@ canary:
   payload:
     value_files: ["./config/production.yml", "./config/_common.yml"]
     release: production-myapp
-    namespace: production
+    namespace: example-helm
     track: canary
     values:
       replicaCount: 1
@@ -29,7 +29,7 @@ production:
     # Remove the canary deployment if it exists when doing a full prod deploy.
     remove_canary: true
     release: production-myapp
-    namespace: production
+    namespace: example-helm
     track: stable
     values:
       replicaCount: 5
@@ -46,7 +46,7 @@ staging:
   payload:
     value_files: ["./config/staging.yml", "./config/_common.yml"]
     release: staging-myapp
-    namespace: staging
+    namespace: example-helm
     track: stable
     values:
       replicaCount: 1
@@ -68,7 +68,7 @@ review:
   payload:
     value_files: ["./config/review.yml", "./config/_common.yml"]
     release: review-myapp-${{ pr }}
-    namespace: staging
+    namespace: example-helm
     track: stable
     values:
       replicaCount: 1

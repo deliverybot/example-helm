@@ -14,7 +14,7 @@ jobs:
       with:
         release: 'review-myapp-pr${{ github.event.pull_request.number }}'
         track: 'stable'
-        namespace: 'staging'
+        namespace: 'example-helm'
         chart: 'app'
         token: '${{ github.token }}'
       env:
