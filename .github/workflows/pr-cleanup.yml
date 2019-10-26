@@ -10,10 +10,11 @@ jobs:
     - name: 'Deploy'
       uses: 'deliverybot/helm@v1'
       with:
+        # Task remove means to remove the helm release.
+        task: 'remove'
         release: 'review-myapp-pr${{ github.event.pull_request.number }}'
         track: 'stable'
         namespace: 'example-helm'
-        chart: 'app'
         token: '${{ github.token }}'
       env:
         KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
