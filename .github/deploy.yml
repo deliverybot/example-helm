@@ -12,9 +12,6 @@ canary:
     track: canary
     values:
       replicaCount: 1
-      image:
-        repository: docker.pkg.github.com/deliverybot/example-helm/app
-        tag: ${{ commit.sha }}
 
 # Deployment to a production environment is kicked off manually. This actually
 # runs two deployment, one is to remove the canary pods if it exists and the
@@ -33,9 +30,6 @@ production:
     track: stable
     values:
       replicaCount: 5
-      image:
-        repository: docker.pkg.github.com/deliverybot/example-helm/app
-        tag: ${{ commit.sha }}
 
 # Automatic deployment to a staging environment on every push to master.
 staging:
@@ -50,9 +44,6 @@ staging:
     track: stable
     values:
       replicaCount: 1
-      image:
-        repository: docker.pkg.github.com/deliverybot/example-helm/app
-        tag: ${{ commit.sha }}
 
 # Review environments can be triggered with /deploy review inside a pull
 # request.
@@ -72,6 +63,3 @@ review:
     track: stable
     values:
       replicaCount: 1
-      image:
-        repository: docker.pkg.github.com/deliverybot/example-helm/app
-        tag: ${{ commit.sha }}
