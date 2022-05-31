@@ -7,7 +7,7 @@ canary:
   description: 'Canary'
   payload:
     value_files: ["./config/production.yml", "./config/_common.yml"]
-    release: production-myapp
+    release: production-myk8sapp
     namespace: example-helm
     track: canary
     values:
