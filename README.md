@@ -1,5 +1,8 @@
 # Deliverybot Helm Example
 
+> [!WARNING]
+> This example is no longer maintained and the repository is archived. It uses the archived [deliverybot/helm](https://github.com/deliverybot/helm) action, which installs Helm 2. See the [Helm guide](https://deliverybot.dev/docs/integrations/action-helm/) for a current setup with `helm upgrade --install`.
+
 This is an example of deploying to Helm using GitHub actions.
 [View the guide.](https://deliverybot.dev/docs/integrations/action-helm/)
 
